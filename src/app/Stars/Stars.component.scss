@@ -11,6 +11,12 @@
     flex-direction: row-reverse;
     margin: 10px 0;
 
+    // Con esto separamos las estrellas
+    input:nth-child(even) {
+        margin-left: 2em;
+      }
+    
+
     input {
       position: relative;
       width: 20px;
@@ -21,6 +27,7 @@
       cursor: pointer;
       appearance: none;
       overflow: hidden;
+
 
     //   Aquí está el color de fondo de las estrellas
       &:before {
@@ -76,3 +83,8 @@
     }
   }
 }
+
+// Para cambiar el tamaño de las estrellas habrá que cambiar el font-size de la clase .starsContainer input:before, después calcular el width, left, right y height con la siguiente fórmula:
+// width = font-size * 20 / 34;
+// height = font-size * 40 / 34;
+// left || right = font-size * 4 / 34;
