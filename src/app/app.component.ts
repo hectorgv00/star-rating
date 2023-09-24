@@ -14,6 +14,18 @@ export class AppComponent {
     name: 'test',
     rating: 0
   }
+  starsOptions2: IStar = {
+    fontSize: 34,
+    stars: 5,
+    name: 'tost',
+    rating: 0
+  }
+  starsOptions3: IStar = {
+    fontSize: 5,
+    stars: 5,
+    name: 'tust',
+    rating: 0
+  }
 
   gerStarsNumber(event:number){
     console.log(event);
