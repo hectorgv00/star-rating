@@ -12,7 +12,7 @@ export class AppComponent {
     fontSize: 155,
     stars: 5,
     name: 'test',
-    rating: 0
+    rating: 6
   }
   starsOptions2: IStar = {
     fontSize: 34,
@@ -24,7 +24,7 @@ export class AppComponent {
     fontSize: 5,
     stars: 5,
     name: 'tust',
-    rating: 0
+    rating: 7
   }
 
   gerStarsNumber(event:number){
