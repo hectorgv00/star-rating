@@ -1,0 +1,78 @@
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+::ng-deep {
+  .starsContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: row-reverse;
+    margin: 10px 0;
+
+    input {
+      position: relative;
+      width: 20px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      appearance: none;
+      overflow: hidden;
+
+    //   Aquí está el color de fondo de las estrellas
+      &:before {
+        content: "\f005";
+        position: absolute;
+        font-family: fontAwesome;
+        font-size: 34px;
+        position: absolute;
+        left: 4px;
+        color: #000;
+        transition: 0.5s;
+      }
+
+      &:nth-child(2n + 1) {
+        &:before {
+          right: 4px;
+          left: initial;
+        }
+      }
+
+
+    //   Primera estrella
+      &:nth-last-child(1):checked::before,
+      &:nth-last-child(1):hover::before,
+      &:nth-last-child(2):checked::before,
+      &:nth-last-child(2):hover::before,
+      &:nth-last-child(2):hover ~ input:nth-last-child(1)::before,
+      &:nth-last-child(2):checked ~ input:nth-last-child(1)::before {
+        color: #3216b0;
+        text-shadow: 0px 0px 2px #3216b0;
+      }
+
+
+    //   Estrellas generales
+      &:hover::before,
+      &:hover ~ input:before,
+      &:checked ~ input:before,
+      &:checked::before {
+        color: rgb(0, 89, 255);
+        text-shadow: 0px 0px 5px rgb(0, 89, 255);
+      }
+
+    //   Última estrella
+      &:first-child:hover::before,
+      &:first-child:checked::before,
+      &:first-child:hover ~ input:not(:first-child),
+      &:first-child:checked ~ input:not(:first-child),
+      &:first-child:hover ~ input:not(:first-child)::before,
+      &:first-child:checked ~ input:not(:first-child)::before {
+        color: #227be9;
+        text-shadow: 0px 0px 12px #227be9;
+      }
+    }
+  }
+}
