@@ -17,7 +17,7 @@ export class StarsComponent implements OnInit {
   @Output() rating: EventEmitter<number> = new EventEmitter<number>();
 
   @Input() stars: IStar = {
-    fontSize: '34px',
+    fontSize: 34,
     stars: 5,
     name: 'test',
   };
@@ -34,9 +34,9 @@ export class StarsComponent implements OnInit {
           // Creamos los inputs de las estrellas
           this.createInputsStars(starsContainer)
           // Recogemos los inputs de las estrellas
-          let stars:HTMLElement[] = Array.from(document.querySelectorAll(
-            `input[type="radio"][name="${this.stars.name}"]`
-          ));      
+          let stars:HTMLElement[] = this.getStarsInptuts();
+          // Añadimos el tamaño de las estrellas
+          this.setStarsSize(stars);
           // Añadimos el evento click a cada estrella
           this.addEventListenerClick(stars);    
           // Si hay una valoracion previa, la mostramos
@@ -69,5 +69,23 @@ export class StarsComponent implements OnInit {
 
   getStarsContainer():HTMLElement{
    return document.querySelector(`#${this.stars.name}`)!;
+  }
+
+  getStarsInptuts():HTMLElement[]{
+   return Array.from(document.querySelectorAll(
+      `input[type="radio"][name="${this.stars.name}"]`
+    ));      
+  }
+
+  setStarsSize(stars:HTMLElement[]):void{
+    stars.forEach((star) => {
+      star.style.fontSize = this.stars.fontSize + 'px';
+      star.style.left = ( Number(this.stars.fontSize) * 4 / 34 ) + 'px';
+      star.style.right = ( Number(this.stars.fontSize) * 4 / 34 ) + 'px';
+      star.style.width = ( Number(this.stars.fontSize) * 20 / 34 ) + 'px';
+      star.style.height = ( Number(this.stars.fontSize) * 40 / 34 ) + 'px';
+    }
+  );
+    
   }
 }

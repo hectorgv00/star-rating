@@ -9,7 +9,7 @@ import { IStar } from './iStar';
 export class AppComponent {
   title = 'star-rating';
   starsOptions: IStar = {
-    fontSize: '34px',
+    fontSize: 155,
     stars: 5,
     name: 'test',
     rating: 0

@@ -1,5 +1,5 @@
 export interface IStar {
-    fontSize: string;
+    fontSize: number;
     stars: number;
     name: string;
     rating?: number;
