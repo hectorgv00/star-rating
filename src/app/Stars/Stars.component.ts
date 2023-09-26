@@ -19,7 +19,7 @@ export class StarsComponent implements OnInit {
   @Input() stars: IStar = {
     fontSize: 34,
     stars: 5,
-    name: 'test',
+    name: '',
   };
 
   constructor() {}
@@ -32,16 +32,22 @@ export class StarsComponent implements OnInit {
           // Recogemos el contenedor de las estrellas que coincida con el nombre
           let starsContainer: HTMLElement = this.getStarsContainer();
           // Creamos los inputs de las estrellas
-          this.createInputsStars(starsContainer)
+          this.createInputsStars(starsContainer);
           // Recogemos los inputs de las estrellas
-          let stars:HTMLElement[] = this.getStarsInptuts();
+          let stars: HTMLElement[] = this.getStarsInptuts();
           // Añadimos el tamaño de las estrellas
           this.setStarsSize(stars);
           // Añadimos el evento click a cada estrella
-          this.addEventListenerClick(stars);    
+          this.addEventListenerClick(stars);
           // Si hay una valoracion previa, la mostramos
-          if(this.stars.rating){
-            stars[this.stars.stars * 2 - this.stars.rating].click();
+          if (this.stars.rating) {
+            if (this.stars.rating > this.stars.stars) {
+              throw new Error(
+                'La valoracion no puede ser mayor que el numero de estrellas'
+              );
+            }
+            console.log(stars[this.stars.stars * 2 - this.stars.rating * 2]);
+            stars[this.stars.stars * 2 - this.stars.rating * 2].click();
           }
         }, 1);
       }
@@ -49,8 +55,8 @@ export class StarsComponent implements OnInit {
   }
 
   ngOnInit() {}
-  
-  createInputsStars(starsContainer:HTMLElement ){
+
+  createInputsStars(starsContainer: HTMLElement) {
     for (let index = 0; index < this.stars.stars * 2; index++) {
       let halfStar = document.createElement(`input`);
       halfStar.setAttribute('type', 'radio');
@@ -59,33 +65,33 @@ export class StarsComponent implements OnInit {
     }
   }
 
-  addEventListenerClick(stars:HTMLElement[]){
+  addEventListenerClick(stars: HTMLElement[]) {
     stars.forEach((star, index) => {
       star.addEventListener('click', () => {
-        this.rating.emit(this.stars.stars * 2 - index);
+        this.rating.emit((this.stars.stars * 2 - index) / 2);
       });
     });
   }
 
-  getStarsContainer():HTMLElement{
-   return document.querySelector(`#${this.stars.name}`)!;
+  getStarsContainer(): HTMLElement {
+    return document.querySelector(`#${this.stars.name}`)!;
   }
 
-  getStarsInptuts():HTMLElement[]{
-   return Array.from(document.querySelectorAll(
-      `input[type="radio"][name="${this.stars.name}"]`
-    ));      
+  getStarsInptuts(): HTMLElement[] {
+    return Array.from(
+      document.querySelectorAll(
+        `input[type="radio"][name="${this.stars.name}"]`
+      )
+    );
   }
 
-  setStarsSize(stars:HTMLElement[]):void{
+  setStarsSize(stars: HTMLElement[]): void {
     stars.forEach((star) => {
       star.style.fontSize = this.stars.fontSize + 'px';
-      star.style.left = ( Number(this.stars.fontSize) * 4 / 34 ) + 'px';
-      star.style.right = ( Number(this.stars.fontSize) * 4 / 34 ) + 'px';
-      star.style.width = ( Number(this.stars.fontSize) * 20 / 34 ) + 'px';
-      star.style.height = ( Number(this.stars.fontSize) * 40 / 34 ) + 'px';
-    }
-  );
-    
+      star.style.left = (Number(this.stars.fontSize) * 4) / 34 + 'px';
+      star.style.right = (Number(this.stars.fontSize) * 4) / 34 + 'px';
+      star.style.width = (Number(this.stars.fontSize) * 20) / 34 + 'px';
+      star.style.height = (Number(this.stars.fontSize) * 40) / 34 + 'px';
+    });
   }
 }

@@ -9,10 +9,10 @@ import { IStar } from './iStar';
 export class AppComponent {
   title = 'star-rating';
   starsOptions: IStar = {
-    fontSize: 155,
+    fontSize: 20,
     stars: 5,
     name: 'test',
-    rating: 6
+    rating: 5.5
   }
   starsOptions2: IStar = {
     fontSize: 34,
@@ -24,7 +24,7 @@ export class AppComponent {
     fontSize: 5,
     stars: 5,
     name: 'tust',
-    rating: 7
+    rating: 1.5
   }
 
   gerStarsNumber(event:number){
